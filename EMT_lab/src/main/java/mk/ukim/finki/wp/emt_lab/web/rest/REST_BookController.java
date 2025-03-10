@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/books")
@@ -54,7 +55,7 @@ public class REST_BookController {
     }
 
     @PreAuthorize("hasRole('LIBRARIAN')")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Book> delete(@PathVariable Long id) {
         if (bookService.findById(id).isPresent()) {
             bookService.delete(id);
@@ -70,6 +71,22 @@ public class REST_BookController {
         return bookService.rentBook(id, bookDto)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping("/searchBook")
+    public ResponseEntity<List<Book>> search(@RequestParam(required = false) String author_name, @RequestParam(required = false) String book_name) {
+//        if (!Objects.equals(author_name, "")) author_name = author_name.toLowerCase();
+//        if (!Objects.equals(book_name, "")) book_name = book_name.toLowerCase();
+
+
+        List<Book> books = bookService.findByAuthorAndBookName(author_name, book_name);
+
+        if (!books.isEmpty()) {
+            return ResponseEntity.ok(books);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }

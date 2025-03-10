@@ -92,4 +92,9 @@ public class BookServiceImpl implements BookService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<Book> findByAuthorAndBookName(String authorName, String bookName) {
+        return bookRepository.findByBookNameAndAuthorName(bookName, authorName);
+    }
 }
