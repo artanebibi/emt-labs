@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  postgres-db:
+    image: postgres
+    container_name: "bookshop"
+    restart: always
+    environment:
+      - POSTGRES_USER=artan
+      - POSTGRES_PASSWORD=art123
+      - POSTGRES_DB=book-shop
+    ports:
+      - "5432:5432"
+
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data
+
+  emt-application:
+    build: .
+    container_name: emt-app
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/book-shop
+      - SPRING_DATASOURCE_USERNAME=artan
+      - SPRING_DATASOURCE_PASSWORD=art123
+      - SPRING_JPA_DATABASE-PLATFORM=org.hibernate.dialect.PostgreSQLDialect
