@@ -10,6 +10,7 @@ import mk.ukim.finki.wp.emt_lab.service.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -70,7 +71,11 @@ public class BookServiceImpl implements BookService {
                     if (!bookDto.getAuthors().isEmpty()) {
                         existingBook.setAuthors(authorRepository.findAllById(bookDto.getAuthors()));
                     }
-                    existingBook.setAvailableCopies(bookDto.getAvailableCopies());
+
+                    // if a book is rented, decrease avalaible copies
+                    if (bookDto.isRented()) {
+                        existingBook.setAvailableCopies(bookDto.getAvailableCopies() - 1);
+                    }
                     existingBook.setRented(bookDto.isRented());
                     return bookRepository.save(existingBook);
                 });
@@ -80,7 +85,8 @@ public class BookServiceImpl implements BookService {
     public Optional<Book> rentBook(Long id, BookDto bookDto) {
         return bookRepository.findById(id)
                 .map(existingBook -> {
-                    existingBook.setRented(bookDto.isRented());
+                    existingBook.setAvailableCopies(bookDto.getAvailableCopies() - 1);
+                    existingBook.setRented(true);
                     return bookRepository.save(existingBook);
                 });
     }

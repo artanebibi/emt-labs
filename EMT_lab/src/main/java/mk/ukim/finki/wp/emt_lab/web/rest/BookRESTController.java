@@ -11,16 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/books")
 
-public class REST_BookController {
+public class BookRESTController {
     private final BookService bookService;
     private final AuthorService authorService;
 
-    public REST_BookController(BookService bookService, AuthorService authorService) {
+    public BookRESTController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
         this.authorService = authorService;
     }

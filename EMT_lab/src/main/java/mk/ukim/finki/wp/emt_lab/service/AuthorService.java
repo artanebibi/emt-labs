@@ -2,19 +2,23 @@ package mk.ukim.finki.wp.emt_lab.service;
 
 import mk.ukim.finki.wp.emt_lab.model.Author;
 import mk.ukim.finki.wp.emt_lab.model.Country;
+import mk.ukim.finki.wp.emt_lab.model.dto.AuthorDto;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorService {
     List<Author> findAll();
 
-    Author findById(Long id);
+    Optional<Author> findById(Long id);
 
-    void save(Author author);
+    void delete(Long id);
 
-    Author delete(Long id);
+    Optional<Author> update (Long id, AuthorDto authorDto);
 
-    Author create(String name, String surname, Long a);
+    Optional<Author> save (AuthorDto authorDto);
 
-    Author update( Long id, String name, String surname, Long countryId);
+    Author create(String name, String surname, Long countryId);
+
 }

@@ -3,7 +3,8 @@ package mk.ukim.finki.wp.emt_lab.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Optional;
 
 @Data
 @Entity
@@ -59,4 +60,5 @@ public class Author {
     public void setCountry(Country country) {
         this.country = country;
     }
+
 }
