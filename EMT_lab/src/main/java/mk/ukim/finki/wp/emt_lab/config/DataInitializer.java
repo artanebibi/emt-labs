@@ -41,10 +41,10 @@ public class DataInitializer {
         Author adichie = this.authorService.create("Chimamanda", "Ngozi Adichie", nigeria.getId());
 
         // Using BookDto and save method
-        bookService.save(new BookDto("The Shining", Category.THRILER, Collections.singletonList(king.getId()), 447, false));
-        bookService.save(new BookDto("Kafka on the Shore", Category.CLASSICS, Collections.singletonList(murakami.getId()), 505, false));
-        bookService.save(new BookDto("Harry Potter and the Philosopher's Stone", Category.FANTASY, Collections.singletonList(rowling.getId()), 223, false));
-        bookService.save(new BookDto("One Hundred Years of Solitude", Category.HISTORY, Collections.singletonList(marquez.getId()), 417, false));
-        bookService.save(new BookDto("Americanah", Category.THRILER, Collections.singletonList(adichie.getId()), 477, false));
+        bookService.save(new BookDto("The Shining", Category.THRILER, Collections.singletonList(king.getId()), 447, false, false));
+        bookService.save(new BookDto("Kafka on the Shore", Category.CLASSICS, Collections.singletonList(murakami.getId()), 505, false, false));
+        bookService.save(new BookDto("Harry Potter and the Philosopher's Stone", Category.FANTASY, Collections.singletonList(rowling.getId()), 223, false, false));
+        bookService.save(new BookDto("One Hundred Years of Solitude", Category.HISTORY, Collections.singletonList(marquez.getId()), 417, false, false));
+        bookService.save(new BookDto("Americanah", Category.THRILER, Collections.singletonList(adichie.getId()), 477, false, false));
     }
 }

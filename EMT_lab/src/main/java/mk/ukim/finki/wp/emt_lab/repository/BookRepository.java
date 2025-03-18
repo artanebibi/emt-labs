@@ -13,4 +13,8 @@ public interface BookRepository extends JpaSpecificationRepository<Book, Long> {
             "where b.name = :bookName or a.name = :authorName")
     List<Book> findByBookNameAndAuthorName(@Param("bookName") String bookName,
                                            @Param("authorName") String authorName);
+
+
+    @Query("select b from Book as b where b.isDeleted = false")
+    List<Book> findAll();
 }

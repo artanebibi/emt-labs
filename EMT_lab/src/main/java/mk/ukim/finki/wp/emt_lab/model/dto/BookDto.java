@@ -21,14 +21,18 @@ public class BookDto {
     private List<Long> authors;
 
     private int availableCopies;
+
     private boolean rented;
 
-    public BookDto(String name, Category category, List<Long> authors, int availableCopies, boolean rented) {
+    private boolean isDeleted;
+
+    public BookDto(String name, Category category, List<Long> authors, int availableCopies, boolean rented, boolean isDeleted) {
         this.name = name;
         this.category = category;
         this.authors = authors;
         this.availableCopies = availableCopies;
         this.rented = rented;
+        this.isDeleted = isDeleted;
     }
 
     public BookDto() {
@@ -74,5 +78,13 @@ public class BookDto {
 
     public int getAvailableCopies() {
         return availableCopies;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

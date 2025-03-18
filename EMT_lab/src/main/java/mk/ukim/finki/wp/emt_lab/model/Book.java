@@ -26,14 +26,29 @@ public class Book {
 
     private boolean rented;
 
-    public Book(String name, Category category, List<Author> authors, int availableCopies, boolean rented) {
+    private boolean isDeleted;
+
+    public Book(Long id, String name, Category category, List<Author> authors, int availableCopies, boolean rented, boolean isDeleted) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.authors = authors;
         this.availableCopies = availableCopies;
         this.rented = rented;
+        this.isDeleted = isDeleted;
     }
-    public Book() {}
+
+    public Book() {
+    }
+
+    public Book(String name, Category category, List<Author> allById, int availableCopies, boolean rented, boolean deleted) {
+        this.name = name;
+        this.category = category;
+        this.authors = allById;
+        this.availableCopies = availableCopies;
+        this.rented = rented;
+        this.isDeleted = deleted;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -53,6 +68,14 @@ public class Book {
 
     public void setAvailableCopies(int availableCopies) {
         this.availableCopies = availableCopies;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public Long getId() {
@@ -79,7 +102,7 @@ public class Book {
         return rented;
     }
 
-    public void setRented(boolean rented) {
-        this.rented = rented;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 }

@@ -35,28 +35,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Long id) {
-        bookRepository.deleteById(id);
+        Book book = bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
+        book.setDeleted(true);
+        bookRepository.save(book);
     }
-
-//    @Override
-//    public Book create(String name, Category category, List<Long> authorIds, int availableCopies) {
-//        List<Author> authorList = authorRepository.findAllById(authorIds);
-//        return bookRepository.save(new Book(name, category, authorList, availableCopies));
-//    }
-//
-
-//    @Override
-//    public Book update(Long id, String name, Category category, List<Long> authorIds, int availableCopies) {
-//        Book book = bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
-//        book.setName(name);
-//        book.setCategory(category);
-//        List<Author> authorList = authorRepository.findAllById(authorIds);
-//        book.setAuthors(authorList);
-//        book.setAvailableCopies(availableCopies);
-//
-//        return bookRepository.save(book);
-//    }
-
 
     @Override
     public Optional<Book> update(Long id, BookDto bookDto) {
@@ -94,7 +76,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<Book> save(BookDto bookDto) {
         if (!bookDto.getAuthors().isEmpty()) {
-            return Optional.of(bookRepository.save((new Book(bookDto.getName(), bookDto.getCategory(), authorRepository.findAllById(bookDto.getAuthors()), bookDto.getAvailableCopies(), bookDto.isRented()))));
+            return Optional.of(bookRepository.save((new Book(bookDto.getName(), bookDto.getCategory(), authorRepository.findAllById(bookDto.getAuthors()), bookDto.getAvailableCopies(), bookDto.isRented(), bookDto.isDeleted()))));
         }
         return Optional.empty();
     }
