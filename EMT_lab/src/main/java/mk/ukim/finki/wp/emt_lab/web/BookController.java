@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.emt_lab.model.Book;
 import mk.ukim.finki.wp.emt_lab.model.dto.BookDto;
 import mk.ukim.finki.wp.emt_lab.service.AuthorService;
 import mk.ukim.finki.wp.emt_lab.service.BookService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -23,10 +24,14 @@ public class BookController {
         this.authorService = authorService;
     }
 
+    @Value("${server.port}")
+    private int port;
+
     @GetMapping("/")
     public String listAll(Model model) {
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("port", port);
         return "home";
     }
 
