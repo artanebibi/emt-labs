@@ -1,6 +1,8 @@
 package mk.ukim.finki.wp.emt_lab.service.impl;
 
+import jakarta.transaction.Transactional;
 import mk.ukim.finki.wp.emt_lab.model.Author;
+import mk.ukim.finki.wp.emt_lab.model.Book;
 import mk.ukim.finki.wp.emt_lab.model.Country;
 import mk.ukim.finki.wp.emt_lab.model.dto.AuthorDto;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidAuthorIdException;
@@ -26,7 +28,6 @@ public class AuthorServiceImpl implements AuthorService {
         this.bookRepository = bookRepository;
     }
 
-
     @Override
     public List<Author> findAll() {
         return authorRepository.findAll();
@@ -38,8 +39,17 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        authorRepository.deleteById(id);
+        Author author = authorRepository.findById(id)
+                .orElseThrow(InvalidAuthorIdException::new);
+
+        List<Book> books = bookRepository.findByAuthors_Id(id);
+        for (Book book : books) {
+            book.getAuthors().remove(author);
+            bookRepository.save(book);
+        }
+        authorRepository.delete(author);
     }
 
     @Override
@@ -52,7 +62,6 @@ public class AuthorServiceImpl implements AuthorService {
                     if (authorDto.getSurname() != null) {
                         existingAuthor.setSurname(authorDto.getSurname());
                     }
-
                     if (authorDto.getCountry() != null) {
                         countryRepository.findById(authorDto.getCountry())
                                 .ifPresent(existingAuthor::setCountry);
@@ -64,7 +73,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Optional<Author> save(AuthorDto authorDto) {
         if (authorDto.getCountry() != null) {
-            return Optional.of(authorRepository.save(new Author(authorDto.getName(), authorDto.getSurname(), countryRepository.findById(authorDto.getCountry()).orElseThrow(InvalidCountryIdException::new))));
+            Country country = countryRepository.findById(authorDto.getCountry())
+                    .orElseThrow(InvalidCountryIdException::new);
+            Author author = new Author(authorDto.getName(), authorDto.getSurname(), country);
+            return Optional.of(authorRepository.save(author));
         }
         return Optional.empty();
     }
