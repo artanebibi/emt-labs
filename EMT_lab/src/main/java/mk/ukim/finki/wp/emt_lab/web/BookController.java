@@ -1,14 +1,11 @@
 package mk.ukim.finki.wp.emt_lab.web;
 
 
-import mk.ukim.finki.wp.emt_lab.model.Book;
-import mk.ukim.finki.wp.emt_lab.model.dto.BookDto;
-import mk.ukim.finki.wp.emt_lab.service.AuthorService;
-import mk.ukim.finki.wp.emt_lab.service.BookService;
+import mk.ukim.finki.wp.emt_lab.model.domain.Book;
+import mk.ukim.finki.wp.emt_lab.service.application.AuthorService;
+import mk.ukim.finki.wp.emt_lab.service.application.BookService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 

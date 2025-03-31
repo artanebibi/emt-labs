@@ -1,6 +1,6 @@
 package mk.ukim.finki.wp.emt_lab.repository;
 
-import mk.ukim.finki.wp.emt_lab.model.Book;
+import mk.ukim.finki.wp.emt_lab.model.domain.Book;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

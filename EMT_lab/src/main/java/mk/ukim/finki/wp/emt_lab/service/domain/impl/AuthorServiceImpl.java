@@ -1,16 +1,16 @@
-package mk.ukim.finki.wp.emt_lab.service.impl;
+package mk.ukim.finki.wp.emt_lab.service.domain.impl;
 
 import jakarta.transaction.Transactional;
-import mk.ukim.finki.wp.emt_lab.model.Author;
-import mk.ukim.finki.wp.emt_lab.model.Book;
-import mk.ukim.finki.wp.emt_lab.model.Country;
-import mk.ukim.finki.wp.emt_lab.model.dto.AuthorDto;
+import mk.ukim.finki.wp.emt_lab.model.domain.Author;
+import mk.ukim.finki.wp.emt_lab.model.domain.Book;
+import mk.ukim.finki.wp.emt_lab.model.domain.Country;
+import mk.ukim.finki.wp.emt_lab.dto.Author.AuthorDto;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidAuthorIdException;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidCountryIdException;
 import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
 import mk.ukim.finki.wp.emt_lab.repository.CountryRepository;
-import mk.ukim.finki.wp.emt_lab.service.AuthorService;
+import mk.ukim.finki.wp.emt_lab.service.domain.AuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

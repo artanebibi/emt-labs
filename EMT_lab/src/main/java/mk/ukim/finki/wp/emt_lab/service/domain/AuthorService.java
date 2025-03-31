@@ -1,8 +1,8 @@
-package mk.ukim.finki.wp.emt_lab.service;
+package mk.ukim.finki.wp.emt_lab.service.domain;
 
-import mk.ukim.finki.wp.emt_lab.model.Author;
-import mk.ukim.finki.wp.emt_lab.model.Country;
-import mk.ukim.finki.wp.emt_lab.model.dto.AuthorDto;
+import mk.ukim.finki.wp.emt_lab.model.domain.Author;
+import mk.ukim.finki.wp.emt_lab.model.domain.Country;
+import mk.ukim.finki.wp.emt_lab.dto.Author.AuthorDto;
 
 import javax.swing.text.html.Option;
 import java.util.List;

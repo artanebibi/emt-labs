@@ -1,6 +1,6 @@
-package mk.ukim.finki.wp.emt_lab.service;
+package mk.ukim.finki.wp.emt_lab.service.application;
 
-import mk.ukim.finki.wp.emt_lab.model.Country;
+import mk.ukim.finki.wp.emt_lab.model.domain.Country;
 
 import java.util.List;
 

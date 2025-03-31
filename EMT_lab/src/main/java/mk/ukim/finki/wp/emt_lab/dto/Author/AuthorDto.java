@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.emt_lab.model.dto;
+package mk.ukim.finki.wp.emt_lab.dto.Author;
 
 
 import lombok.Data;

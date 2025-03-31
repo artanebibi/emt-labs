@@ -25,3 +25,5 @@ services:
       - SPRING_DATASOURCE_USERNAME=a
       - SPRING_DATASOURCE_PASSWORD=a
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+
+

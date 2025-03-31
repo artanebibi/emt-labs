@@ -1,12 +1,12 @@
-package mk.ukim.finki.wp.emt_lab.service.impl;
+package mk.ukim.finki.wp.emt_lab.service.domain.impl;
 
 
-import mk.ukim.finki.wp.emt_lab.model.Book;
-import mk.ukim.finki.wp.emt_lab.model.dto.BookDto;
+import mk.ukim.finki.wp.emt_lab.model.domain.Book;
+import mk.ukim.finki.wp.emt_lab.dto.Book.BookDto;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidBookIdException;
 import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
-import mk.ukim.finki.wp.emt_lab.service.BookService;
+import mk.ukim.finki.wp.emt_lab.service.domain.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

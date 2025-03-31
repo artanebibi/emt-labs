@@ -1,12 +1,11 @@
-package mk.ukim.finki.wp.emt_lab.model.dto;
+package mk.ukim.finki.wp.emt_lab.dto.Book;
 
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
-import mk.ukim.finki.wp.emt_lab.model.Author;
-import mk.ukim.finki.wp.emt_lab.model.Category;
+import mk.ukim.finki.wp.emt_lab.model.enumerations.Category;
 
 import java.util.List;
 

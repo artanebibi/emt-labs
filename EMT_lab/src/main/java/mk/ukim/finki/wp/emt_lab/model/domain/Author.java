@@ -1,10 +1,8 @@
-package mk.ukim.finki.wp.emt_lab.model;
+package mk.ukim.finki.wp.emt_lab.model.domain;
 
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Optional;
 
 @Data
 @Entity

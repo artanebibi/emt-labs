@@ -1,14 +1,14 @@
-package mk.ukim.finki.wp.emt_lab.service.impl;
+package mk.ukim.finki.wp.emt_lab.service.application.impl;
 
-import mk.ukim.finki.wp.emt_lab.model.Country;
+import mk.ukim.finki.wp.emt_lab.model.domain.Country;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidCountryIdException;
 import mk.ukim.finki.wp.emt_lab.repository.CountryRepository;
-import mk.ukim.finki.wp.emt_lab.service.CountryService;
+import mk.ukim.finki.wp.emt_lab.service.application.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("ApplicationCountryServiceImpl")
 public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
 

@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.emt_lab.service;
+package mk.ukim.finki.wp.emt_lab.service.application;
 
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Root;
