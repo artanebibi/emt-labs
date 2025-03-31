@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.emt_lab.dto.User;
 
 
 import mk.ukim.finki.wp.emt_lab.model.domain.User;
+import mk.ukim.finki.wp.emt_lab.model.domain.Wishlist;
 import mk.ukim.finki.wp.emt_lab.model.enumerations.Role;
 
 public record CreateUserDto(
@@ -10,13 +11,14 @@ public record CreateUserDto(
         String repeatPassword,
         String name,
         String surname,
-        Role role
+        Role role,
+        Wishlist wishlist
 ) {
 
     /*
         todo: add repeat password logic
      */
     public User toUser() {
-        return new User(username, password, name, surname, role);
+        return new User(username, password, name, surname, role, wishlist);
     }
 }

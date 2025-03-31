@@ -50,7 +50,7 @@ public class DataInitializer {
         Author adichie = this.authorService.create("Chimamanda", "Ngozi Adichie", nigeria.getId());
 
         // Using BookDto and save method
-        bookService.save(new CreateBookDto("The Shining", Category.THRILER, Collections.singletonList(king.getId()), 447, false, false));
+        bookService.save(new CreateBookDto("The Shining", Category.THRILER, Collections.singletonList(king.getId()), 0, false, false));
         bookService.save(new CreateBookDto("Kafka on the Shore", Category.CLASSICS, Collections.singletonList(murakami.getId()), 505, false, false));
         bookService.save(new CreateBookDto("Harry Potter and the Philosopher's Stone", Category.FANTASY, Collections.singletonList(rowling.getId()), 223, false, false));
         bookService.save(new CreateBookDto("One Hundred Years of Solitude", Category.HISTORY, Collections.singletonList(marquez.getId()), 417, false, false));

@@ -31,10 +31,21 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
 
+    @OneToOne
+    private Wishlist wishlist;
+
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
     public User() {
+    }
+
+    public User(String username, String name, String surname, Role role, Wishlist wishlist) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+        this.wishlist = wishlist;
     }
 
     public User(String username, String password, String name, String surname, Role role) {
@@ -43,6 +54,23 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.role = role;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public User(String username, String password, String name, String surname, Role role, Wishlist wishlist) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+        this.wishlist = wishlist;
     }
 
     public User(String username, String password, String name, String surname) {
