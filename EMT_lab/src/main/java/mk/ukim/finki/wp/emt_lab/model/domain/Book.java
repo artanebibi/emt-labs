@@ -28,6 +28,17 @@ public class Book {
 
     private boolean isDeleted;
 
+    @ManyToOne
+    private User rentedBy;
+
+    public User getRentedBy() {
+        return rentedBy;
+    }
+
+    public void setRentedBy(User rentedBy) {
+        this.rentedBy = rentedBy;
+    }
+
     public Book(Long id, String name, Category category, List<Author> authors, int availableCopies, boolean rented, boolean isDeleted) {
         this.id = id;
         this.name = name;
