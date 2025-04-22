@@ -8,6 +8,7 @@ import mk.ukim.finki.wp.emt_lab.dto.Author.AuthorDto;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidAuthorIdException;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidCountryIdException;
 import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
+import mk.ukim.finki.wp.emt_lab.repository.AuthorsPerCountryViewRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
 import mk.ukim.finki.wp.emt_lab.repository.CountryRepository;
 import mk.ukim.finki.wp.emt_lab.service.domain.AuthorService;
@@ -21,11 +22,13 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final CountryRepository countryRepository;
     private final BookRepository bookRepository;
+    private final AuthorsPerCountryViewRepository authorsPerCountryViewRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository, CountryRepository countryRepository, BookRepository bookRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, CountryRepository countryRepository, BookRepository bookRepository, AuthorsPerCountryViewRepository authorsPerCountryViewRepository) {
         this.authorRepository = authorRepository;
         this.countryRepository = countryRepository;
         this.bookRepository = bookRepository;
+        this.authorsPerCountryViewRepository = authorsPerCountryViewRepository;
     }
 
     @Override
@@ -49,6 +52,7 @@ public class AuthorServiceImpl implements AuthorService {
             book.getAuthors().remove(author);
             bookRepository.save(book);
         }
+        this.authorsPerCountryViewRepository.refreshMaterialized();
         authorRepository.delete(author);
     }
 
@@ -66,6 +70,7 @@ public class AuthorServiceImpl implements AuthorService {
                         countryRepository.findById(authorDto.getCountry())
                                 .ifPresent(existingAuthor::setCountry);
                     }
+                    this.authorsPerCountryViewRepository.refreshMaterialized();
                     return authorRepository.save(existingAuthor);
                 });
     }
@@ -76,6 +81,7 @@ public class AuthorServiceImpl implements AuthorService {
             Country country = countryRepository.findById(authorDto.getCountry())
                     .orElseThrow(InvalidCountryIdException::new);
             Author author = new Author(authorDto.getName(), authorDto.getSurname(), country);
+            this.authorsPerCountryViewRepository.refreshMaterialized();
             return Optional.of(authorRepository.save(author));
         }
         return Optional.empty();
@@ -85,6 +91,12 @@ public class AuthorServiceImpl implements AuthorService {
     public Author create(String name, String surname, Long countryId) {
         Country country = countryRepository.findById(countryId).orElseThrow(InvalidCountryIdException::new);
         Author author = new Author(name, surname, country);
+        this.authorsPerCountryViewRepository.refreshMaterialized();
         return authorRepository.save(author);
+    }
+
+    @Override
+    public void refreshMaterialized() {
+        this.authorsPerCountryViewRepository.refreshMaterialized();
     }
 }

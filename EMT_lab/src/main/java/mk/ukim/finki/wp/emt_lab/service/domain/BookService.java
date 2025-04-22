@@ -21,4 +21,5 @@ public interface BookService {
     Optional<Book> save(BookDto bookDto);
     Optional<Book> rentBook(Long id, BookDto bookDto);
     List<Book> findByAuthorAndBookName(String authorName, String bookName);
+    void refreshMaterialized();
 }

@@ -35,7 +35,7 @@ public class DataInitializer {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void initData() {
         Country usa = this.countryService.create("United States", "North America");
         Country uk = this.countryService.create("United Kingdom", "Europe");

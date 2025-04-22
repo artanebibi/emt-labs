@@ -21,4 +21,6 @@ public interface AuthorService {
 
     Author create(String name, String surname, Long countryId);
 
+    void refreshMaterialized();
+
 }

@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.emt_lab.dto.Book.BookDto;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.InvalidBookIdException;
 import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
+import mk.ukim.finki.wp.emt_lab.repository.BooksPerAuthorViewRepository;
 import mk.ukim.finki.wp.emt_lab.service.domain.BookService;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final BooksPerAuthorViewRepository booksPerAuthorViewRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository, BooksPerAuthorViewRepository booksPerAuthorViewRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.booksPerAuthorViewRepository = booksPerAuthorViewRepository;
     }
 
     @Override
@@ -84,5 +87,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByAuthorAndBookName(String authorName, String bookName) {
         return bookRepository.findByBookNameAndAuthorName(bookName, authorName);
+    }
+
+    @Override
+    public void refreshMaterialized() {
+        this.booksPerAuthorViewRepository.refreshMaterialized();
     }
 }

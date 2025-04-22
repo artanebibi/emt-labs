@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.wp.emt_lab.dto.Author.CreateAuthorDto;
 import mk.ukim.finki.wp.emt_lab.dto.Author.UpdateAuthorDto;
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
+import mk.ukim.finki.wp.emt_lab.model.views.Authors_By_Country_View;
+import mk.ukim.finki.wp.emt_lab.repository.AuthorsPerCountryViewRepository;
 import mk.ukim.finki.wp.emt_lab.service.application.AuthorService;
 import mk.ukim.finki.wp.emt_lab.service.application.CountryService;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,12 @@ import java.util.List;
 public class AuthorRESTController {
     private final AuthorService authorService;
     private final CountryService countryService;
+    private final AuthorsPerCountryViewRepository authorsPerCountryViewRepository;
 
-    public AuthorRESTController(AuthorService authorService, CountryService countryService) {
+    public AuthorRESTController(AuthorService authorService, CountryService countryService, AuthorsPerCountryViewRepository authorsPerCountryViewRepository) {
         this.authorService = authorService;
         this.countryService = countryService;
+        this.authorsPerCountryViewRepository = authorsPerCountryViewRepository;
     }
 
     @Operation(summary = "List all authors", description = "Retrieve a list of all authors in the system.")
@@ -62,5 +66,11 @@ public class AuthorRESTController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+
+    @GetMapping("/by-country")
+    public List<Authors_By_Country_View> getAuthorsByCountry() {
+        return this.authorsPerCountryViewRepository.findAll();
     }
 }

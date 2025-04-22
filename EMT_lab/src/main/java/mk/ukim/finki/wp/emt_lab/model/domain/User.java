@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Wishlist wishlist;
 
     @Enumerated(value = EnumType.STRING)

@@ -6,6 +6,8 @@ import mk.ukim.finki.wp.emt_lab.dto.Book.UpdateBookDto;
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
 import mk.ukim.finki.wp.emt_lab.model.domain.Book;
 import mk.ukim.finki.wp.emt_lab.model.domain.User;
+import mk.ukim.finki.wp.emt_lab.model.views.Books_By_Author_View;
+import mk.ukim.finki.wp.emt_lab.repository.BooksPerAuthorViewRepository;
 import mk.ukim.finki.wp.emt_lab.service.application.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import mk.ukim.finki.wp.emt_lab.service.domain.UserService;
@@ -25,14 +27,16 @@ public class BookRESTController {
 
     private final BookService bookService;
     private final UserService userService;
+    private final BooksPerAuthorViewRepository booksByAuthorRepository;
 
     // In-memory statistics trackers
     private Map<String, Integer> rentedBooksCount = new HashMap<>(); // Key: Book ID, Value: Number of times rented
     private Map<String, Integer> authorRentedBooksCount = new HashMap<>(); // Key: Author ID, Value: Number of books rented by the author
 
-    public BookRESTController(BookService bookService, UserService userService) {
+    public BookRESTController(BookService bookService, UserService userService, BooksPerAuthorViewRepository booksByAuthorRepository) {
         this.bookService = bookService;
         this.userService = userService;
+        this.booksByAuthorRepository = booksByAuthorRepository;
     }
 
     @Operation(summary = "List all books", description = "Retrieve a list of all books in the system.")
@@ -140,4 +144,12 @@ public class BookRESTController {
     public ResponseEntity<Map<String, Integer>> getAuthorRentedBooksStatistics() {
         return ResponseEntity.ok(authorRentedBooksCount);
     }
+
+
+    @GetMapping("/by-author")
+    public List<Books_By_Author_View> getBooksByAuthor() {
+        return booksByAuthorRepository.findAll();
+    }
+
+
 }
