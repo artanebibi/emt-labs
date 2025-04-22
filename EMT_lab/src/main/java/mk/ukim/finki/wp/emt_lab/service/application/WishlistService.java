@@ -8,4 +8,6 @@ public interface WishlistService {
     Optional<Wishlist> getWishlistByUsername(String username);
     Optional<Wishlist> addBookToWishlist(String username, Long bookId);
     Optional<Wishlist> removeBookFromWishlist(String username, Long bookId);
+
+    void refreshMaterialized();
 }

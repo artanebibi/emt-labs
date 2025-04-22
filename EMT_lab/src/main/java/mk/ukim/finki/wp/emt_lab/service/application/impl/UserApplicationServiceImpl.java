@@ -45,6 +45,8 @@ public class UserApplicationServiceImpl implements UserApplicationService {
 
         String token = jwtHelper.generateToken(user);
 
+        String currentUser_username = jwtHelper.extractUsername(token);
+
         return Optional.of(new LoginResponseDto(token));
     }
 

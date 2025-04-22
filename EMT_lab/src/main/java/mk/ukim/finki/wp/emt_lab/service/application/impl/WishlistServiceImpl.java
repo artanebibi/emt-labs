@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.emt_lab.model.domain.Wishlist;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.BookNotFoundException;
 import mk.ukim.finki.wp.emt_lab.model.exceptions.UserNotFoundException;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
+import mk.ukim.finki.wp.emt_lab.repository.UserAuthorRentedBooksRepository;
 import mk.ukim.finki.wp.emt_lab.repository.UserRepository;
 import mk.ukim.finki.wp.emt_lab.repository.WishlistRepository;
 import mk.ukim.finki.wp.emt_lab.service.application.WishlistService;
@@ -20,11 +21,13 @@ public class WishlistServiceImpl implements WishlistService {
     private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final UserAuthorRentedBooksRepository userAuthorRentedBooksRepository;
 
-    public WishlistServiceImpl(WishlistRepository wishlistRepository, UserRepository userRepository, BookRepository bookRepository) {
+    public WishlistServiceImpl(WishlistRepository wishlistRepository, UserRepository userRepository, BookRepository bookRepository, UserAuthorRentedBooksRepository userAuthorRentedBooksRepository) {
         this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.userAuthorRentedBooksRepository = userAuthorRentedBooksRepository;
     }
 
     @Override
@@ -71,5 +74,10 @@ public class WishlistServiceImpl implements WishlistService {
         wishlistRepository.save(wishlist);
 
         return Optional.of(wishlist);
+    }
+
+    @Override
+    public void refreshMaterialized() {
+        this.userAuthorRentedBooksRepository.refreshMaterialized();
     }
 }

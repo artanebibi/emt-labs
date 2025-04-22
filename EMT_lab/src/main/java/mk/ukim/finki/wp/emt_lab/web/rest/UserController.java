@@ -115,6 +115,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(null);
         }
 
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
