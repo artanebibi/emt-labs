@@ -1,6 +1,5 @@
-package mk.ukim.finki.wp.emt_lab.config;
+package mk.ukim.finki.wp.emt_lab.config.init;
 
-import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.wp.emt_lab.dto.Book.CreateBookDto;
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
 import mk.ukim.finki.wp.emt_lab.model.domain.User;
@@ -10,7 +9,6 @@ import mk.ukim.finki.wp.emt_lab.repository.UserRepository;
 import mk.ukim.finki.wp.emt_lab.service.application.AuthorService;
 import mk.ukim.finki.wp.emt_lab.service.application.BookService;
 import mk.ukim.finki.wp.emt_lab.service.application.CountryService;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

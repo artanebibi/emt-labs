@@ -5,7 +5,7 @@ import mk.ukim.finki.wp.emt_lab.dto.User.DisplayUserDto;
 import mk.ukim.finki.wp.emt_lab.dto.User.LoginResponseDto;
 import mk.ukim.finki.wp.emt_lab.dto.User.LoginUserDto;
 import mk.ukim.finki.wp.emt_lab.model.domain.User;
-import mk.ukim.finki.wp.emt_lab.security.JwtHelper;
+import mk.ukim.finki.wp.emt_lab.helpers.JwtHelper;
 import mk.ukim.finki.wp.emt_lab.service.application.UserApplicationService;
 import mk.ukim.finki.wp.emt_lab.service.domain.UserService;
 import org.springframework.stereotype.Service;
@@ -44,8 +44,6 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         );
 
         String token = jwtHelper.generateToken(user);
-
-        String currentUser_username = jwtHelper.extractUsername(token);
 
         return Optional.of(new LoginResponseDto(token));
     }

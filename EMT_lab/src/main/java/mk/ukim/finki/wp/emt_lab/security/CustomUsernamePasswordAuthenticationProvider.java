@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.emt_lab.config;
+package mk.ukim.finki.wp.emt_lab.security;
 
 import mk.ukim.finki.wp.emt_lab.service.domain.UserService;
 import org.springframework.security.authentication.AuthenticationProvider;

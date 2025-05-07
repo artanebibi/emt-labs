@@ -9,7 +9,7 @@ SELECT c.id as country_id, COUNT (*) as author_count FROM
              Author as a JOIN Country as c
              on
              a.country_id = c.id
-GROUP BY c.id
+GROUP BY c.id;
 
 
 

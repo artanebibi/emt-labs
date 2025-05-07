@@ -1,5 +1,6 @@
-package mk.ukim.finki.wp.emt_lab.config;
+package mk.ukim.finki.wp.emt_lab.config.security;
 
+import mk.ukim.finki.wp.emt_lab.security.CustomUsernamePasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -53,7 +54,21 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
+                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
+                .headers(AbstractHttpConfigurer::disable) // Allow H2 iframes
+                .headers(headers -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                )
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(
+                                "/h2/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api/user/register",
+                                "/api/user/login"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                );
 //                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
 //                .authorizeHttpRequests(requests -> requests
 //                        .requestMatchers(

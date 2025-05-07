@@ -1,6 +1,7 @@
-package mk.ukim.finki.wp.emt_lab.security;
+package mk.ukim.finki.wp.emt_lab.config.security;
 
-import mk.ukim.finki.wp.emt_lab.config.CustomUsernamePasswordAuthenticationProvider;
+import mk.ukim.finki.wp.emt_lab.security.CustomUsernamePasswordAuthenticationProvider;
+import mk.ukim.finki.wp.emt_lab.web.filters.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

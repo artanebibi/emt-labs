@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.emt_lab.web.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.wp.emt_lab.dto.Book.CreateBookDto;
+import mk.ukim.finki.wp.emt_lab.dto.Book.DisplayBookDto;
 import mk.ukim.finki.wp.emt_lab.dto.Book.UpdateBookDto;
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
 import mk.ukim.finki.wp.emt_lab.model.domain.Book;
@@ -19,6 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/api/books")
@@ -150,6 +153,12 @@ public class BookRESTController {
     public List<Books_By_Author_View> getBooksByAuthor() {
         return booksByAuthorRepository.findAll();
     }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<DisplayBookDto>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(bookService.findAll(pageable));
+    }
+
 
 
 }

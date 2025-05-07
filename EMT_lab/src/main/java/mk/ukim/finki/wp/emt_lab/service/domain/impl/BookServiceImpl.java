@@ -8,6 +8,8 @@ import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BookRepository;
 import mk.ukim.finki.wp.emt_lab.repository.BooksPerAuthorViewRepository;
 import mk.ukim.finki.wp.emt_lab.service.domain.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +31,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Page<Book> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override
